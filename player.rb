@@ -11,15 +11,18 @@ class Player
 
   def hand_sum
     sum = []
-    @hand.each{|arr| arr.size < 3 ? sum << arr[1] : sum << arr[2]}
+    @hand.each { |arr| arr.size < 3 ? sum << arr[1] : sum << arr[2] }
     if sum.sum > 21
       sum = []
-      @hand.each{|arr|sum << arr[1]}
+      @hand.each { |arr| sum << arr[1] }
     end
     sum.sum
   end
 
-  protected
+  def show_hand
+    self.hand.each { |arr| print " #{arr[0]}" }
+    puts "\n SCORE - #{hand_sum}".red
+  end
 
   attr_writer :bank
 
@@ -30,4 +33,9 @@ class Player
   def get_winning(sum)
     self.bank += sum
   end
+
+  def clear_hand
+    @hand.clear
+  end
+
 end
