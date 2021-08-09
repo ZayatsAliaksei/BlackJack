@@ -11,4 +11,5 @@ class Dealer < Player
   def turn?
     score < 17
   end
+
 end

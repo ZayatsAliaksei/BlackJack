@@ -1,11 +1,6 @@
-require_relative 'deck'
-require_relative 'player'
-require_relative 'interface'
-require_relative 'dealer'
-require_relative 'card_template'
-require 'colorize'
-
-splash = <<EOS
+module Logo
+  def black_jack_logo
+    splash = <<EOS
 88          88                       88            88                       88
 88          88                       88            ""                       88
 88          88                       88                                     88
@@ -17,7 +12,7 @@ splash = <<EOS
                                                   ,88
                                                888P"
 EOS
-puts splash.green
+    puts splash.green
+  end
 
-game = Interface.new
-game.game_start
+end

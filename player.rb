@@ -1,27 +1,12 @@
-require_relative 'deck'
+require_relative 'hand'
 
 class Player
-  attr_reader :bank, :hand, :name, :score
+  attr_reader :bank, :name, :hand
 
   def initialize(name = nil)
     @name = name
     @bank = 100
-    @hand = []
-  end
-
-  def hand_sum
-    sum = []
-    @hand.each { |arr| arr.size < 3 ? sum << arr[1] : sum << arr[2] }
-    if sum.sum > 21
-      sum = []
-      @hand.each { |arr| sum << arr[1] }
-    end
-    sum.sum
-  end
-
-  def show_hand
-    self.hand.each { |arr| print " #{arr[0]}" }
-    puts "\n SCORE - #{hand_sum}".red
+    @hand = Hand.new
   end
 
   attr_writer :bank
@@ -34,8 +19,26 @@ class Player
     self.bank += sum
   end
 
-  def clear_hand
-    @hand.clear
+  def take_cart(cart)
+    @hand.cards_in_hand << cart
+  end
+
+  def show_hand
+
+    size = @hand.cards_in_hand.size
+    ranks = @hand.cards_in_hand.map(&:first)
+    suites = @hand.cards_in_hand.map(&:last)
+
+    puts "┌──────────┐ " * size
+    puts " %s           " * size % ranks
+    puts "│          │ " * size
+    puts "│          │ " * size
+    puts "     %s       " * size % suites
+    puts "│          │ " * size
+    puts "│          │ " * size
+    puts "         %s   " * size % ranks
+    puts "└──────────┘ " * size
+    puts "\n SCORE - #{@hand.hand_sum}".red
   end
 
 end
