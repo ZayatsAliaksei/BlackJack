@@ -15,7 +15,13 @@ class Player
     self.bank > 0 ? self.bank -= sum : "no more money"
   end
 
-  def get_winning(sum)
+  def get_money(sum, type = nil)
+    case type
+    when 'win'
+      puts 'You WIN !'
+    when 'tie'
+      puts 'Tie!'
+    end
     self.bank += sum
   end
 

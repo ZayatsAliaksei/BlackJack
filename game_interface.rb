@@ -1,6 +1,6 @@
 require_relative 'black_jack'
 
-class Game
+class GameInterface
   def initialize
     puts "Введите имя игрока"
     @game = BlackJack.new(gets.chomp.to_s)
@@ -67,4 +67,4 @@ class Game
 
 end
 
-Game.new
+GameInterface.new

@@ -49,29 +49,24 @@ class BlackJack
   def open_cart
     player_carts_sum = @player.hand.hand_sum
     dealer_carts_sum = @dealer.hand.hand_sum
-    puts 'Your:'.yellow
     @player.show_hand
-    puts 'Dealer:'.blue
     @dealer.show_hand
     if (player_carts_sum > dealer_carts_sum && player_carts_sum < 22) || (player_carts_sum < 22 && dealer_carts_sum > 21)
       player_wins(@player)
-      puts 'You WIN!'
     elsif (player_carts_sum == dealer_carts_sum) || (player_carts_sum > 21 && dealer_carts_sum > 21)
       tie
-      puts 'Tie!'
     else
       player_wins(@dealer)
-      puts 'Dealer WIN!'
     end
   end
 
   def player_wins(player)
-    player.get_winning(BET * 2)
+    player.get_money(BET * 2,'win')
   end
 
   def tie
-    @player.get_winning(BET)
-    @dealer.get_winning(BET)
+    @player.get_money(BET, 'tie')
+    @dealer.get_money(BET)
   end
 
 end
